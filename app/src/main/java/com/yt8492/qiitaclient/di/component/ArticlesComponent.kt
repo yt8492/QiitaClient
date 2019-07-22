@@ -1,9 +1,8 @@
 package com.yt8492.qiitaclient.di.component
 
 import com.yt8492.qiitaclient.articles.ArticlesActivity
-import com.yt8492.qiitaclient.di.modlue.ActivityModule
-import com.yt8492.qiitaclient.di.modlue.ArticlesActivityModule
-import com.yt8492.qiitaclient.di.modlue.ArticlesModule
+import com.yt8492.qiitaclient.di.module.ArticlesActivityModule
+import com.yt8492.qiitaclient.di.module.ArticlesModule
 import dagger.Component
 
 @Component(

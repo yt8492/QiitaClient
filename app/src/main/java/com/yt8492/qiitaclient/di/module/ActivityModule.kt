@@ -1,4 +1,4 @@
-package com.yt8492.qiitaclient.di.modlue
+package com.yt8492.qiitaclient.di.module
 
 import com.yt8492.qiitaclient.articles.ArticlesActivity
 import dagger.Module

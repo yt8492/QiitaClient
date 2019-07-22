@@ -1,4 +1,4 @@
-package com.yt8492.qiitaclient.di.modlue
+package com.yt8492.qiitaclient.di.module
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter

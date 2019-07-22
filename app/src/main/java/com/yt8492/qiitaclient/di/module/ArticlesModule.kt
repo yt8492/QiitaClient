@@ -1,4 +1,4 @@
-package com.yt8492.qiitaclient.di.modlue
+package com.yt8492.qiitaclient.di.module
 
 import android.app.Application
 import com.yt8492.qiitaclient.articles.ArticlesViewModel
