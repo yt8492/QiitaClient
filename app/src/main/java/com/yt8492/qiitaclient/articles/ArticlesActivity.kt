@@ -1,6 +1,7 @@
 package com.yt8492.qiitaclient.articles
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.transaction
 import com.yt8492.qiitaclient.R

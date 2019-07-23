@@ -6,12 +6,10 @@ import com.yt8492.qiitaclient.data.datasource.ArticleRepository
 import com.yt8492.qiitaclient.data.model.Article
 import javax.inject.Inject
 
-class ArticlesViewModel @Inject constructor(
-    app: Application,
-    private val query: String? = null,
+class ArticlesViewModel (
     private val articleRepository: ArticleRepository
-) : AndroidViewModel(app) {
-
+) : ViewModel() {
+    private val query: String? = null
     private var currentPage = 1
 
     private val _articles = MutableLiveData<List<Article>>().apply {
@@ -31,14 +29,13 @@ class ArticlesViewModel @Inject constructor(
         _articles.postValue(currentArticles + nextArticles)
     }
 
-    class Factory(private val application: Application,
-                  private val query: String?,
+    class Factory(private val query: String?,
                   private val articleRepository: ArticleRepository
     ) : ViewModelProvider.NewInstanceFactory() {
 
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return ArticlesViewModel(application, query, articleRepository) as T
+            return ArticlesViewModel(articleRepository) as T
         }
     }
 }
