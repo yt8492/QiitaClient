@@ -4,12 +4,13 @@ import com.yt8492.qiitaclient.data.datasource.ArticleRepository
 import com.yt8492.qiitaclient.data.datasource.ArticleRepositoryImpl
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-abstract class RepositoryModule {
+class RepositoryModule {
 
-    @Binds
+    @Provides
     @Singleton
-    abstract fun bindArticleRepository(articleRepositoryImpl: ArticleRepositoryImpl): ArticleRepository
+    fun bindArticleRepository(articleRepositoryImpl: ArticleRepositoryImpl): ArticleRepository = articleRepositoryImpl
 }

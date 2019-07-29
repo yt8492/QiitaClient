@@ -7,7 +7,6 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class ActivityModule {
 
-    @ContributesAndroidInjector(modules = [ArticlesActivityModule::class, ArticlesModule::class,
-        QiitaDataSourceModule::class])
+    @ContributesAndroidInjector(modules = [ArticlesActivityModule::class])
     abstract fun articlesActivity(): ArticlesActivity
 }

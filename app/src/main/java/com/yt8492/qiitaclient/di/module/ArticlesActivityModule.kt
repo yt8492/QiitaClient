@@ -7,6 +7,6 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class ArticlesActivityModule {
 
-    @ContributesAndroidInjector(modules = [ArticlesModule::class, QiitaDataSourceModule::class, RepositoryModule::class])
-    internal abstract fun articlesFragment(): ArticlesFragment
+    @ContributesAndroidInjector
+    abstract fun articlesFragment(): ArticlesFragment
 }

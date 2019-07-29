@@ -7,8 +7,6 @@ import com.yt8492.qiitaclient.data.datasource.ArticleRepository
 import javax.inject.Inject
 
 class ArticlesViewModelFactory @Inject constructor(
-    private val application: Application,
-    private val query: String?,
     private val articleRepository: ArticleRepository
 ) : ViewModelProvider.Factory {
 
@@ -18,8 +16,6 @@ class ArticlesViewModelFactory @Inject constructor(
             "Unknown ViewModel Class"
         }
         return ArticlesViewModel(
-            application,
-            query,
             articleRepository
         ) as T
     }
