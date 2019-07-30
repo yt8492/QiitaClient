@@ -9,7 +9,7 @@ data class Article(
     val body: String,
     val renderedBody: String,
     val user: User,
-    val tags: List<Tag>,
+    val tags: List<String>,
     val group: Group?,
     val commentsCount: Int,
     val likesCount: Int,

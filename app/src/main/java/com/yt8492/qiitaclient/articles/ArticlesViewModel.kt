@@ -1,20 +1,18 @@
 package com.yt8492.qiitaclient.articles
 
-import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.yt8492.qiitaclient.data.datasource.ArticleRepository
 import com.yt8492.qiitaclient.data.model.Article
-import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 class ArticlesViewModel (
     private val articleRepository: ArticleRepository
 ) : ViewModel() {
-    private val query: String? = null
+    private var query: String? = null
     private var currentPage = 1
 
-    private val _articles = MutableLiveData<List<Article>>().apply {
-        value = articleRepository.getArticles(query, currentPage).value
-    }
+    private val _articles = MediatorLiveData<List<Article>>()
     val articles: LiveData<List<Article>>
         get() = _articles
 
@@ -22,20 +20,29 @@ class ArticlesViewModel (
     val dataLoading: LiveData<Boolean>
         get() = _dataLoading
 
-    fun loadNextPage() {
-        val currentArticles = _articles.value ?: return
-        currentPage++
-        val nextArticles = articleRepository.getArticles(query, currentPage).value ?: return
-        _articles.postValue(currentArticles + nextArticles)
+    fun start(query: String?) {
+        Log.d("hogehoge", "start")
+        _dataLoading.value = true
+        this.query = query
+        viewModelScope.launch {
+            articleRepository.getArticles(query, currentPage).let {
+                _articles.addSource(it) {
+                    _articles.value = it
+                    _dataLoading.value = false
+                }
+            }
+        }
     }
 
-    class Factory(private val query: String?,
-                  private val articleRepository: ArticleRepository
-    ) : ViewModelProvider.NewInstanceFactory() {
-
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return ArticlesViewModel(articleRepository) as T
+    fun loadNextPage() {
+        val currentArticles = _articles.value ?: emptyList()
+        _dataLoading.value = true
+        viewModelScope.launch {
+            articleRepository.getArticles(query, currentPage + 1).value?.let { nextArticles ->
+                _articles.value = currentArticles + nextArticles
+                currentPage++
+            }
+            _dataLoading.value = false
         }
     }
 }

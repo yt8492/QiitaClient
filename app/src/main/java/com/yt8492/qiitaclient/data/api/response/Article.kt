@@ -22,12 +22,12 @@ data class Article(
     val isPrivate: Boolean,
     @Json(name = "reactions_count")
     val reactionsCount: Int,
-    val tags: List<Tag>,
+    val tags: List<ArticleTag>,
     val title: String,
     @Json(name = "updated_at")
     val updatedAt: Date,
     val url: String,
     val user: User,
     @Json(name = "page_views_count")
-    val viewCount: Int
+    val viewCount: Int?
 )

@@ -6,7 +6,8 @@ buildscript {
             'dagger2': '2.23.2',
             'moshi': '1.8.0',
             'retrofit2': '2.6.0',
-            'lifecycle': '2.2.0-alpha02'
+            'lifecycle': '2.2.0-alpha02',
+            'fragment': '1.1.0-rc03'
     ]
     repositories {
         google()

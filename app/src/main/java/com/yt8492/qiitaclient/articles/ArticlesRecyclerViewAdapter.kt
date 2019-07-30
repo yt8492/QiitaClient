@@ -3,6 +3,7 @@ package com.yt8492.qiitaclient.articles
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import com.yt8492.qiitaclient.R
@@ -62,4 +63,14 @@ class ArticlesRecyclerViewAdapter(
     }
 
     inner class ViewHolder(val binding: ItemArticleBinding) : RecyclerView.ViewHolder(binding.root)
+
+    companion object {
+        @JvmStatic
+        @BindingAdapter("items")
+        fun RecyclerView.bindItems(items: List<Article>?) {
+            val articles = items ?: return
+            val adapter = adapter as ArticlesRecyclerViewAdapter
+            adapter.setArticles(articles)
+        }
+    }
 }

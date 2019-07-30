@@ -7,7 +7,7 @@ import com.squareup.moshi.JsonClass
 data class Tag(
     @Json(name = "followers_count")
     val followersCount: Int,
-    @Json(name = "iconUrl")
+    @Json(name = "icon_url")
     val iconUrl: String?,
     @Json(name = "id")
     val name: String,

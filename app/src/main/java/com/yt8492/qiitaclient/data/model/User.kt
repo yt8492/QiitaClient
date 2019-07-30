@@ -10,7 +10,7 @@ data class User(
     val githubId: String?,
     val facebookId: String?,
     val linkedinId: String?,
-    val organization: String,
+    val organization: String?,
     val location: String?,
     val followeesCount: Int,
     val followersCount: Int,

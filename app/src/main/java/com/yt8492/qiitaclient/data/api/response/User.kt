@@ -21,7 +21,7 @@ data class User(
     val linkedinId: String?,
     val location: String?,
     val name: String?,
-    val organization: String,
+    val organization: String?,
     @Json(name = "permanent_id")
     val permanentId: Int,
     @Json(name = "profile_image_url")

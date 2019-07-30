@@ -4,17 +4,25 @@
         xmlns:tools="http://schemas.android.com/tools"
         tools:context=".articles.ArticlesFragment">
     <data>
-        <variable name="isLoading" type="boolean"/>
+        <import type="android.view.View" />
+        <variable name="viewModel" type="com.yt8492.qiitaclient.articles.ArticlesViewModel"/>
     </data>
     <FrameLayout
                  android:id="@+id/articlesFrame"
                  android:layout_width="match_parent"
                  android:layout_height="match_parent">
 
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading"
+                android:visibility="@{viewModel.dataLoading ? View.VISIBLE : View.GONE}"/>
+
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/articlesRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layoutManager="LinearLayoutManager"/>
+                app:layoutManager="LinearLayoutManager"
+                app:items="@{viewModel.articles}" />
     </FrameLayout>
 </layout>
