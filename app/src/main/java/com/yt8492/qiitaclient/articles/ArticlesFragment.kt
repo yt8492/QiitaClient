@@ -8,9 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.yt8492.qiitaclient.R
 import com.yt8492.qiitaclient.data.model.Article
 import com.yt8492.qiitaclient.databinding.FragmentArticlesBinding
+import com.yt8492.qiitaclient.util.extention.toast
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -25,7 +28,7 @@ class ArticlesFragment : Fragment() {
 
     private val onArticleClickListener = object : ArticlesRecyclerViewAdapter.OnArticleClickListener {
         override fun onClick(article: Article) {
-
+            toast(article.title)
         }
     }
     private val articlesAdapter = ArticlesRecyclerViewAdapter(onArticleClickListener)
@@ -36,7 +39,11 @@ class ArticlesFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_articles, container, false)
         binding.lifecycleOwner = this
-        binding.articlesRecyclerView.adapter = articlesAdapter
+        with(binding.articlesRecyclerView) {
+            val dividerItemDecoration = DividerItemDecoration(inflater.context, LinearLayoutManager(inflater.context).orientation)
+            addItemDecoration(dividerItemDecoration)
+            adapter = articlesAdapter
+        }
         binding.viewModel = viewModel
         viewModel.start(null)
         // Set the adapter
