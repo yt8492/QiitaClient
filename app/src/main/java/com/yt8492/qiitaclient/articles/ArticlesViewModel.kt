@@ -1,6 +1,5 @@
 package com.yt8492.qiitaclient.articles
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.yt8492.qiitaclient.data.datasource.ArticleRepository
 import com.yt8492.qiitaclient.data.model.Article
@@ -21,7 +20,6 @@ class ArticlesViewModel (
         get() = _dataLoading
 
     fun start(query: String?) {
-        Log.d("hogehoge", "start")
         _dataLoading.value = true
         this.query = query
         viewModelScope.launch {
@@ -35,14 +33,18 @@ class ArticlesViewModel (
     }
 
     fun loadNextPage() {
-        val currentArticles = _articles.value ?: emptyList()
-        _dataLoading.value = true
-        viewModelScope.launch {
-            articleRepository.getArticles(query, currentPage + 1).value?.let { nextArticles ->
-                _articles.value = currentArticles + nextArticles
-                currentPage++
+        if (_dataLoading.value == false) {
+            val currentArticles = _articles.value ?: emptyList()
+            _dataLoading.value = true
+            viewModelScope.launch {
+                articleRepository.getArticles(query, currentPage + 1).let {
+                    _articles.addSource(it) { nextArticles ->
+                        _articles.value = currentArticles + nextArticles
+                        currentPage++
+                        _dataLoading.value = false
+                    }
+                }
             }
-            _dataLoading.value = false
         }
     }
 }

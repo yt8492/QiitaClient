@@ -14,6 +14,7 @@ import com.yt8492.qiitaclient.R
 import com.yt8492.qiitaclient.data.model.Article
 import com.yt8492.qiitaclient.databinding.FragmentArticlesBinding
 import com.yt8492.qiitaclient.util.extention.toast
+import com.yt8492.qiitaclient.util.view.InfiniteScrollListener
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -40,9 +41,14 @@ class ArticlesFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_articles, container, false)
         binding.lifecycleOwner = this
         with(binding.articlesRecyclerView) {
-            val dividerItemDecoration = DividerItemDecoration(inflater.context, LinearLayoutManager(inflater.context).orientation)
+            val layoutManager = LinearLayoutManager(inflater.context)
+            val dividerItemDecoration = DividerItemDecoration(inflater.context, layoutManager.orientation)
             addItemDecoration(dividerItemDecoration)
             adapter = articlesAdapter
+            setLayoutManager(layoutManager)
+            addOnScrollListener(InfiniteScrollListener(layoutManager) {
+                viewModel.loadNextPage()
+            })
         }
         binding.viewModel = viewModel
         viewModel.start(null)
