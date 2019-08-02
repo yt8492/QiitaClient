@@ -1,5 +1,7 @@
 package com.yt8492.qiitaclient.articles
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -26,7 +28,7 @@ class ArticlesActivity : AppCompatActivity(), HasSupportFragmentInjector {
         AndroidInjection.inject(this)
         val articlesFragment = ArticlesFragment.newInstance(query)
         supportFragmentManager.commit {
-            add(R.id.fragment_container, articlesFragment)
+            add(R.id.fragmentContainer, articlesFragment)
         }
     }
 
@@ -36,5 +38,10 @@ class ArticlesActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     companion object {
         const val KEY_QUERY = "QUERY"
+
+        fun createIntent(context: Context, query: String?): Intent =
+            Intent(context, ArticlesActivity::class.java).apply {
+                putExtra(KEY_QUERY, query)
+            }
     }
 }
