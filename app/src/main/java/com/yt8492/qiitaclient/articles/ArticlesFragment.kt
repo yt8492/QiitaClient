@@ -51,7 +51,8 @@ class ArticlesFragment : Fragment() {
             })
         }
         binding.viewModel = viewModel
-        viewModel.start(null)
+        val query = arguments?.getString(KEY_QUERY)
+        viewModel.start(query)
         // Set the adapter
         return binding.root
     }
@@ -62,8 +63,14 @@ class ArticlesFragment : Fragment() {
     }
 
     companion object {
+        private const val KEY_QUERY = "QUERY"
+
         @JvmStatic
-        fun newInstance() = ArticlesFragment()
+        fun newInstance(query: String?) = ArticlesFragment().apply {
+            arguments = Bundle().apply {
+                putString(KEY_QUERY, query)
+            }
+        }
 
     }
 }

@@ -16,11 +16,15 @@ class ArticlesActivity : AppCompatActivity(), HasSupportFragmentInjector {
     @Inject
     internal lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
 
+    private val query: String? by lazy {
+        intent.getStringExtra(KEY_QUERY)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         AndroidInjection.inject(this)
-        val articlesFragment = ArticlesFragment.newInstance()
+        val articlesFragment = ArticlesFragment.newInstance(query)
         supportFragmentManager.commit {
             add(R.id.fragment_container, articlesFragment)
         }
@@ -28,5 +32,9 @@ class ArticlesActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
         return fragmentInjector
+    }
+
+    companion object {
+        const val KEY_QUERY = "QUERY"
     }
 }
