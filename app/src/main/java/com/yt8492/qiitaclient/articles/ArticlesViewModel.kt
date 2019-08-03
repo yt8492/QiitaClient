@@ -3,7 +3,9 @@ package com.yt8492.qiitaclient.articles
 import androidx.lifecycle.*
 import com.yt8492.qiitaclient.data.datasource.ArticleRepository
 import com.yt8492.qiitaclient.data.model.Article
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ArticlesViewModel (
     private val articleRepository: ArticleRepository
@@ -23,12 +25,11 @@ class ArticlesViewModel (
         _dataLoading.value = true
         this.query = query
         viewModelScope.launch {
-            articleRepository.getArticles(query, currentPage).let {
-                _articles.addSource(it) {
-                    _articles.value = it
-                    _dataLoading.value = false
-                }
+            val articles = withContext(Dispatchers.IO) {
+                articleRepository.getArticles(query, currentPage)
             }
+            _articles.value = articles
+            _dataLoading.value = false
         }
     }
 
@@ -37,13 +38,12 @@ class ArticlesViewModel (
             val currentArticles = _articles.value ?: emptyList()
             _dataLoading.value = true
             viewModelScope.launch {
-                articleRepository.getArticles(query, currentPage + 1).let {
-                    _articles.addSource(it) { nextArticles ->
-                        _articles.value = currentArticles + nextArticles
-                        currentPage++
-                        _dataLoading.value = false
-                    }
+                val nextArticles = withContext(Dispatchers.IO) {
+                    articleRepository.getArticles(query, currentPage + 1)
                 }
+                _articles.value = currentArticles + nextArticles
+                currentPage++
+                _dataLoading.value = false
             }
         }
     }
