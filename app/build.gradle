@@ -49,6 +49,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
 
+    implementation "androidx.paging:paging-runtime:$versions.paging"
+
     implementation "com.squareup.moshi:moshi:$versions.moshi"
     implementation "com.squareup.moshi:moshi-adapters:$versions.moshi"
     implementation "com.squareup.moshi:moshi-kotlin:$versions.moshi"
