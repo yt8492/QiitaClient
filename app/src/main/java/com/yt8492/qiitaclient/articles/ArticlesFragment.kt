@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -12,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.yt8492.qiitaclient.R
 import com.yt8492.qiitaclient.data.model.Article
 import com.yt8492.qiitaclient.databinding.FragmentArticlesBinding
-import com.yt8492.qiitaclient.util.extention.toast
 import com.yt8492.qiitaclient.util.view.InfiniteScrollListener
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
@@ -28,7 +29,10 @@ class ArticlesFragment : Fragment() {
 
     private val onArticleClickListener = object : ArticlesRecyclerViewAdapter.OnArticleClickListener {
         override fun onClick(article: Article) {
-            toast(article.title)
+            val tabsIntent = CustomTabsIntent.Builder()
+                .setShowTitle(true)
+                .build()
+            tabsIntent.launchUrl(requireContext(), article.url.toUri())
         }
     }
     private val articlesAdapter = ArticlesRecyclerViewAdapter(onArticleClickListener)
