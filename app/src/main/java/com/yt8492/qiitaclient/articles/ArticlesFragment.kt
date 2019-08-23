@@ -7,6 +7,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yt8492.qiitaclient.R
@@ -26,12 +27,13 @@ class ArticlesFragment : Fragment() {
 
     private val viewModel: ArticlesViewModel by viewModels { viewModelFactory }
 
-    private val onArticleClickListener = object : ArticlesRecyclerViewAdapter.OnArticleClickListener {
-        override fun onClick(article: Article) {
-            toast(article.title)
+    private val onArticleClickListener = object : OnArticleClickListener {
+        override fun onClick(article: Article?) {
+            if (article != null) {
+                toast(article.title)
+            }
         }
     }
-    private val articlesAdapter = ArticlesRecyclerViewAdapter(onArticleClickListener)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,19 +46,18 @@ class ArticlesFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_articles, container, false)
         binding.lifecycleOwner = this
+        val articlesAdapter = ArticlesAdapter(requireContext(), onArticleClickListener)
         with(binding.articlesRecyclerView) {
             val layoutManager = LinearLayoutManager(inflater.context)
             val dividerItemDecoration = DividerItemDecoration(inflater.context, layoutManager.orientation)
             addItemDecoration(dividerItemDecoration)
             adapter = articlesAdapter
             setLayoutManager(layoutManager)
-            addOnScrollListener(InfiniteScrollListener(layoutManager) {
-                viewModel.loadNextPage()
-            })
         }
-        binding.viewModel = viewModel
         val query = arguments?.getString(KEY_QUERY)
-        viewModel.start(query)
+        viewModel.start(query).observe(viewLifecycleOwner, Observer {
+            articlesAdapter.submitList(it)
+        })
         // Set the adapter
         return binding.root
     }
