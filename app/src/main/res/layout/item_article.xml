@@ -4,7 +4,7 @@
 
     <data>
         <variable name="article" type="com.yt8492.qiitaclient.data.model.Article"/>
-        <variable name="clickListener" type="com.yt8492.qiitaclient.articles.ArticlesRecyclerViewAdapter.OnArticleClickListener"/>
+        <variable name="clickListener" type="com.yt8492.qiitaclient.articles.OnArticleClickListener"/>
     </data>
 
     <LinearLayout
