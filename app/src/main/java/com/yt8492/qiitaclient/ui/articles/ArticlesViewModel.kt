@@ -1,4 +1,4 @@
-package com.yt8492.qiitaclient.articles
+package com.yt8492.qiitaclient.ui.articles
 
 import androidx.lifecycle.*
 import androidx.paging.LivePagedListBuilder

@@ -2,7 +2,7 @@ package com.yt8492.qiitaclient.data.datasource
 
 import com.yt8492.qiitaclient.data.api.service.QiitaApi
 import com.yt8492.qiitaclient.data.model.Article
-import com.yt8492.qiitaclient.util.extention.toModel
+import com.yt8492.qiitaclient.data.api.converter.toModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

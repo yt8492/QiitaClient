@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context=".articles.ArticlesFragment">
+        tools:context=".ui.articles.ArticlesFragment">
     <FrameLayout
                  android:id="@+id/articlesFrame"
                  android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.yt8492.qiitaclient.articles
+package com.yt8492.qiitaclient.ui.articles
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

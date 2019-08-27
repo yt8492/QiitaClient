@@ -1,4 +1,4 @@
-package com.yt8492.qiitaclient.articles
+package com.yt8492.qiitaclient.ui.articles
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

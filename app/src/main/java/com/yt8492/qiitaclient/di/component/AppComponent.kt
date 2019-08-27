@@ -1,6 +1,5 @@
 package com.yt8492.qiitaclient.di.component
 
-import android.app.Application
 import com.yt8492.qiitaclient.App
 import com.yt8492.qiitaclient.di.module.*
 import dagger.Component
@@ -12,13 +11,8 @@ import javax.inject.Singleton
 @Component(
     modules = [
         AndroidSupportInjectionModule::class,
-        AppModule::class,
-        ActivityModule::class,
-        ArticlesActivityModule::class,
-        QiitaDataSourceModule::class,
-        RepositoryModule::class
+        ArticlesFragmentModule::class,
+        QiitaDataSourceModule::class
     ]
 )
-interface AppComponent : AndroidInjector<App> {
-    fun inject(app: Application)
-}
+interface AppComponent : AndroidInjector<App>

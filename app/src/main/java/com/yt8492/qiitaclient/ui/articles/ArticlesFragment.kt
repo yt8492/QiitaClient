@@ -1,4 +1,4 @@
-package com.yt8492.qiitaclient.articles
+package com.yt8492.qiitaclient.ui.articles
 
 import android.content.Context
 import android.os.Bundle
@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.yt8492.qiitaclient.R
 import com.yt8492.qiitaclient.data.model.Article
 import com.yt8492.qiitaclient.databinding.FragmentArticlesBinding
-import com.yt8492.qiitaclient.util.view.InfiniteScrollListener
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
