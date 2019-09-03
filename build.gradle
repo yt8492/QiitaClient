@@ -2,7 +2,7 @@
 
 buildscript {
     ext.kotlin_version = '1.3.50'
-    ext.versions = [
+    ext.vers = [
             'coroutine': '1.3.0',
             'appcompat': '1.0.2',
             'core': '1.2.0-alpha03',

@@ -1,6 +1,6 @@
-package com.yt8492.qiitaclient.data.api.service
+package com.yt8492.qiitaclient.infra.api
 
-import com.yt8492.qiitaclient.data.api.response.ArticleJson
+import com.yt8492.qiitaclient.infra.api.json.ArticleJson
 import retrofit2.http.GET
 import retrofit2.http.Query
 

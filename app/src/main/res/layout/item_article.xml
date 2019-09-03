@@ -3,7 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="article" type="com.yt8492.qiitaclient.data.model.Article"/>
+        <variable name="article" type="com.yt8492.qiitaclient.domain.model.Article"/>
         <variable name="clickListener" type="com.yt8492.qiitaclient.ui.articles.OnArticleClickListener"/>
     </data>
 

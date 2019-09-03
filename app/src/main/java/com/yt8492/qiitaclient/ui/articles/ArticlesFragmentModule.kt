@@ -1,4 +1,4 @@
-package com.yt8492.qiitaclient.di.module
+package com.yt8492.qiitaclient.ui.articles
 
 import com.yt8492.qiitaclient.ui.articles.ArticlesFragment
 import dagger.Module

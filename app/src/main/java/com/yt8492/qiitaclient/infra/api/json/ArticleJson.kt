@@ -1,4 +1,4 @@
-package com.yt8492.qiitaclient.data.api.response
+package com.yt8492.qiitaclient.infra.api.json
 
 data class ArticleJson(
     val id: String,

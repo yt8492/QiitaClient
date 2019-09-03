@@ -2,7 +2,7 @@ package com.yt8492.qiitaclient.ui.articles
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.yt8492.qiitaclient.data.datasource.ArticleRepository
+import com.yt8492.qiitaclient.domain.repository.ArticleRepository
 import javax.inject.Inject
 
 class ArticlesViewModelFactory @Inject constructor(

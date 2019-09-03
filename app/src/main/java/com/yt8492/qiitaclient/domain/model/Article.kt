@@ -1,4 +1,4 @@
-package com.yt8492.qiitaclient.data.model
+package com.yt8492.qiitaclient.domain.model
 
 data class Article(
     val id: String,

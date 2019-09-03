@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yt8492.qiitaclient.R
-import com.yt8492.qiitaclient.data.model.Article
+import com.yt8492.qiitaclient.domain.model.Article
 import com.yt8492.qiitaclient.databinding.FragmentArticlesBinding
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
@@ -58,9 +58,10 @@ class ArticlesFragment : Fragment() {
             setLayoutManager(layoutManager)
         }
         val query = arguments?.getString(KEY_QUERY)
-        viewModel.start(query).observe(viewLifecycleOwner, Observer {
+        viewModel.pagedArticleList.observe(viewLifecycleOwner, Observer {
             articlesAdapter.submitList(it)
         })
+        viewModel.start(query)
         // Set the adapter
         return binding.root
     }
