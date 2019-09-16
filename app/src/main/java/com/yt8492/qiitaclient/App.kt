@@ -10,7 +10,7 @@ import javax.inject.Inject
 class App : Application(), HasSupportFragmentInjector {
 
     @Inject
-    internal lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
 
     override fun onCreate() {
         super.onCreate()

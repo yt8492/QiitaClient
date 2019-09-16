@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.yt8492.qiitaclient.domain.model.Article
 import com.yt8492.qiitaclient.databinding.ItemArticleBinding
 
-class ArticlesViewHolder(
+class ArticlesViewHolder private constructor(
     private val binding: ItemArticleBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 

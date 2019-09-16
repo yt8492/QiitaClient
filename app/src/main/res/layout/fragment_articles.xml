@@ -3,14 +3,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         tools:context=".ui.articles.ArticlesFragment">
-    <FrameLayout
-                 android:id="@+id/articlesFrame"
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/articlesRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-    </FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/articlesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 </layout>

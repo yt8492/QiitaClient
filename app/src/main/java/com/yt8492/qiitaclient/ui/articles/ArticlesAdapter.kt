@@ -14,18 +14,30 @@ class ArticlesAdapter(
 
     private val inflater = LayoutInflater.from(context)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticlesViewHolder =
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ArticlesViewHolder =
         ArticlesViewHolder.create(inflater, parent, false)
 
-    override fun onBindViewHolder(holder: ArticlesViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ArticlesViewHolder,
+        position: Int
+    ) {
         holder.bind(getItem(position), listener)
     }
 
     companion object {
         private val ITEM_CALLBACK = object : DiffUtil.ItemCallback<Article>() {
-            override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean = oldItem.id == newItem.id
+            override fun areItemsTheSame(
+                oldItem: Article,
+                newItem: Article
+            ): Boolean = oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean = oldItem == newItem
+            override fun areContentsTheSame(
+                oldItem: Article,
+                newItem: Article
+            ): Boolean = oldItem == newItem
         }
     }
 }

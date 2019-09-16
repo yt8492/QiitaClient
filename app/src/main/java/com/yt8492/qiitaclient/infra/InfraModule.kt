@@ -3,7 +3,7 @@ package com.yt8492.qiitaclient.infra
 import com.yt8492.qiitaclient.domain.repository.ArticleRepository
 import com.yt8492.qiitaclient.infra.api.QiitaApi
 import com.yt8492.qiitaclient.infra.api.QiitaApiFactory
-import com.yt8492.qiitaclient.infra.repository.ArticleRepositoryImpl
+import com.yt8492.qiitaclient.infra.domain.impl.repository.ArticleRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -17,6 +17,5 @@ class InfraModule {
 
     @Provides
     @Singleton
-    fun provideArticleRepository(articleRepositoryImpl: ArticleRepositoryImpl): ArticleRepository =
-        articleRepositoryImpl
+    fun provideArticleRepository(impl: ArticleRepositoryImpl): ArticleRepository = impl
 }

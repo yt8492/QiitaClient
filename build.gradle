@@ -5,10 +5,10 @@ buildscript {
     ext.vers = [
             'coroutine': '1.3.0',
             'appcompat': '1.0.2',
-            'core': '1.2.0-alpha03',
-            'fragment': '1.2.0-alpha02',
+            'core': '1.2.0-alpha04',
+            'fragment': '1.2.0-alpha03',
             'paging': '2.1.0',
-            'lifecycle': '2.2.0-alpha03',
+            'lifecycle': '2.2.0-alpha04',
             'browser': '1.2.0-alpha07',
             'dagger2': '2.23.2',
             'moshi': '1.8.0',

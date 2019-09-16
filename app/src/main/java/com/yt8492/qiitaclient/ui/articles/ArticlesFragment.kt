@@ -7,7 +7,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -20,10 +19,8 @@ import javax.inject.Inject
 
 class ArticlesFragment : Fragment() {
 
-    private lateinit var binding: FragmentArticlesBinding
-
     @Inject
-    internal lateinit var viewModelFactory: ArticlesViewModelFactory
+    lateinit var viewModelFactory: ArticlesViewModelFactory
 
     private val viewModel: ArticlesViewModel by viewModels { viewModelFactory }
 
@@ -32,37 +29,39 @@ class ArticlesFragment : Fragment() {
             if (article != null) {
                 val tabsIntent = CustomTabsIntent.Builder()
                     .setShowTitle(true)
+                    .setToolbarColor(requireContext().getColor(R.color.colorPrimary))
                     .build()
                 tabsIntent.launchUrl(requireContext(), article.url.toUri())
             }
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_articles, container, false)
-        binding.lifecycleOwner = this
-        val articlesAdapter = ArticlesAdapter(requireContext(), onArticleClickListener)
+        setHasOptionsMenu(true)
+        val binding = FragmentArticlesBinding.inflate(
+            inflater,
+            container,
+            false
+        )
+        binding.lifecycleOwner = viewLifecycleOwner
+        val articlesAdapter = ArticlesAdapter(inflater.context, onArticleClickListener)
         with(binding.articlesRecyclerView) {
-            val layoutManager = LinearLayoutManager(inflater.context)
-            val dividerItemDecoration = DividerItemDecoration(inflater.context, layoutManager.orientation)
+            val linearLayoutManager = LinearLayoutManager(inflater.context)
+            val dividerItemDecoration =
+                DividerItemDecoration(inflater.context, linearLayoutManager.orientation)
             addItemDecoration(dividerItemDecoration)
             adapter = articlesAdapter
-            setLayoutManager(layoutManager)
+            layoutManager = linearLayoutManager
         }
-        val query = arguments?.getString(KEY_QUERY)
         viewModel.pagedArticleList.observe(viewLifecycleOwner, Observer {
             articlesAdapter.submitList(it)
         })
+        val query = arguments?.getString(KEY_QUERY)
         viewModel.start(query)
-        // Set the adapter
         return binding.root
     }
 
@@ -88,20 +87,17 @@ class ArticlesFragment : Fragment() {
     }
 
     private fun search(query: String?) {
-        val context = context ?: return
-        val intent = ArticlesActivity.createIntent(context, query)
+        val intent = ArticlesActivity.createIntent(requireContext(), query)
         startActivity(intent)
     }
 
     companion object {
         private const val KEY_QUERY = "QUERY"
 
-        @JvmStatic
         fun newInstance(query: String?) = ArticlesFragment().apply {
             arguments = Bundle().apply {
                 putString(KEY_QUERY, query)
             }
         }
-
     }
 }

@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class ArticlesViewModelFactory @Inject constructor(
     private val articleRepository: ArticleRepository
-) : ViewModelProvider.Factory {
+) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

@@ -1,4 +1,4 @@
-package com.yt8492.qiitaclient.infra.converter
+package com.yt8492.qiitaclient.infra.domain.impl.converter
 
 import com.yt8492.qiitaclient.infra.api.json.ArticleJson
 import com.yt8492.qiitaclient.infra.api.json.UserJson
