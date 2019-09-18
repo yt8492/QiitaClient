@@ -17,5 +17,6 @@ class InfraModule {
 
     @Provides
     @Singleton
-    fun provideArticleRepository(impl: ArticleRepositoryImpl): ArticleRepository = impl
+    fun provideArticleRepository(impl: ArticleRepositoryImpl): ArticleRepository =
+        impl
 }

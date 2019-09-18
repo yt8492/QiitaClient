@@ -10,7 +10,10 @@ class ArticlesViewHolder private constructor(
     private val binding: ItemArticleBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(article: Article?, onArticleClickListener: OnArticleClickListener) {
+    fun bind(
+        article: Article?,
+        onArticleClickListener: OnArticleClickListener
+    ) {
         binding.article = article
         binding.clickListener = onArticleClickListener
         binding.executePendingBindings()

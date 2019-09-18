@@ -12,16 +12,17 @@ class ArticlesViewModel(
 
     private val query = MutableLiveData<String?>()
 
-    val pagedArticleList: LiveData<PagedList<Article>> = query.switchMap { query ->
-        LivePagedListBuilder(
-            ArticleDataSourceFactory(query, articleRepository),
-            PagedList.Config.Builder()
-                .setEnablePlaceholders(false)
-                .setInitialLoadSizeHint(PER_PAGE)
-                .setPageSize(PER_PAGE)
-                .build()
-        ).build()
-    }
+    val pagedArticleList: LiveData<PagedList<Article>> =
+        query.switchMap { query ->
+            LivePagedListBuilder(
+                ArticleDataSourceFactory(query, articleRepository),
+                PagedList.Config.Builder()
+                    .setEnablePlaceholders(false)
+                    .setInitialLoadSizeHint(PER_PAGE)
+                    .setPageSize(PER_PAGE)
+                    .build()
+            ).build()
+        }
 
     fun start(query: String?) {
         this.query.value = query
