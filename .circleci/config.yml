@@ -1,0 +1,31 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/code
+    docker:
+      - image: circleci/android:api-28
+    environment:
+      JVM_OPTS: -Xmx3200m
+    steps:
+      - checkout
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      #      - run:
+      #         name: Chmod パーミッション # Gradlew Dependencies のパーミッションが失敗する場合は、これを使用します
+      #         command: sudo chmod +x ./gradlew
+      - run:
+          name: 依存関係をダウンロード
+          command: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: テストを実行
+          command: ./gradlew lint test
+      - store_artifacts: # アーティファクト (https://circleci.com/docs/ja/2.0/artifacts/) に表示するため
+          path: app/build/reports
+          destination: reports
+      - store_test_results: # テストサマリー (https://circleci.com/docs/ja/2.0/collect-test-data/) に表示するため
+          path: app/build/test-results
+      # デプロイ例については https://circleci.com/docs/ja/2.0/deployment-integrations/ を参照してください
