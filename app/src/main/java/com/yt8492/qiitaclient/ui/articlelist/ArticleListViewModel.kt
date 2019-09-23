@@ -4,14 +4,17 @@ import androidx.lifecycle.*
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.yt8492.qiitaclient.domain.repository.ArticleRepository
-import com.yt8492.qiitaclient.ui.bindingmodel.ArticleBindingModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class ArticleListViewModel(
     private val articleRepository: ArticleRepository
 ) : ViewModel() {
 
-    fun start(query: String?): LiveData<PagedList<ArticleBindingModel>> {
-        return LivePagedListBuilder(
+    private val query = MutableLiveData<String?>()
+
+    val pagedArticleList = query.switchMap { query ->
+        LivePagedListBuilder(
             ArticleDataSourceFactory(query, articleRepository),
             PagedList.Config.Builder()
                 .setEnablePlaceholders(false)
@@ -19,6 +22,10 @@ class ArticleListViewModel(
                 .setPageSize(PER_PAGE)
                 .build()
         ).build()
+    }
+
+    fun start(query: String?): Job = viewModelScope.launch {
+        this@ArticleListViewModel.query.value = query
     }
 
     companion object {

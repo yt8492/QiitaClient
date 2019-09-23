@@ -20,8 +20,6 @@ import javax.inject.Inject
 
 class ArticleListFragment : Fragment() {
 
-    private lateinit var binding: FragmentArticleListBinding
-
     @Inject
     internal lateinit var viewModelFactory: ArticleListViewModelFactory
 
@@ -40,11 +38,12 @@ class ArticleListFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
-        binding = DataBindingUtil.inflate(
+        val binding = DataBindingUtil.inflate<FragmentArticleListBinding>(
             inflater,
             R.layout.fragment_article_list,
             container,
@@ -52,7 +51,7 @@ class ArticleListFragment : Fragment() {
         )
         binding.lifecycleOwner = viewLifecycleOwner
         val articlesAdapter = ArticleListAdapter(
-            requireContext(),
+            inflater.context,
             onArticleClickListener
         )
         with(binding.articlesRecyclerView) {
@@ -63,10 +62,11 @@ class ArticleListFragment : Fragment() {
             adapter = articlesAdapter
             setLayoutManager(layoutManager)
         }
-        val query = arguments?.getString(KEY_QUERY)
-        viewModel.start(query).observe(viewLifecycleOwner, Observer {
+        viewModel.pagedArticleList.observe(viewLifecycleOwner, Observer {
             articlesAdapter.submitList(it)
         })
+        val query = arguments?.getString(KEY_QUERY)
+        viewModel.start(query)
         // Set the adapter
         return binding.root
     }
