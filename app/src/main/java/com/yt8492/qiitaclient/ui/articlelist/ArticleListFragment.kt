@@ -27,6 +27,7 @@ class ArticleListFragment : Fragment() {
         override fun onClick(article: ArticleBindingModel?) {
             if (article != null) {
                 val tabsIntent = CustomTabsIntent.Builder()
+                    .setToolbarColor(requireContext().getColor(R.color.colorPrimary))
                     .setShowTitle(true)
                     .build()
                 tabsIntent.launchUrl(requireContext(), article.articleUrl.toUri())
