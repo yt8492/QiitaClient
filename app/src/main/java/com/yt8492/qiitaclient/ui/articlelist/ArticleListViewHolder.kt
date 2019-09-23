@@ -5,12 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.yt8492.qiitaclient.domain.model.Article
 import com.yt8492.qiitaclient.databinding.ItemArticleBinding
+import com.yt8492.qiitaclient.ui.bindingmodel.ArticleBindingModel
 
 class ArticleListViewHolder(
     private val binding: ItemArticleBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(article: Article?, onArticleClickListener: OnArticleClickListener) {
+    fun bind(
+        article: ArticleBindingModel?,
+        onArticleClickListener: OnArticleClickListener
+    ) {
         binding.article = article
         binding.clickListener = onArticleClickListener
         binding.executePendingBindings()

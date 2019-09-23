@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.yt8492.qiitaclient.R
 import com.yt8492.qiitaclient.databinding.FragmentArticleListBinding
 import com.yt8492.qiitaclient.domain.model.Article
+import com.yt8492.qiitaclient.ui.bindingmodel.ArticleBindingModel
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -29,12 +30,12 @@ class ArticleListFragment : Fragment() {
 
     private val onArticleClickListener = object :
         OnArticleClickListener {
-        override fun onClick(article: Article?) {
+        override fun onClick(article: ArticleBindingModel?) {
             if (article != null) {
                 val tabsIntent = CustomTabsIntent.Builder()
                     .setShowTitle(true)
                     .build()
-                tabsIntent.launchUrl(requireContext(), article.url.toUri())
+                tabsIntent.launchUrl(requireContext(), article.articleUrl.toUri())
             }
         }
     }

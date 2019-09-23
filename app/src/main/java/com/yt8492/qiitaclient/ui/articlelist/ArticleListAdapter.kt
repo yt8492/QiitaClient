@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.yt8492.qiitaclient.domain.model.Article
+import com.yt8492.qiitaclient.ui.bindingmodel.ArticleBindingModel
 
 class ArticleListAdapter(
     context: Context,
     private val listener: OnArticleClickListener
-) : PagedListAdapter<Article, ArticleListViewHolder>(ITEM_CALLBACK) {
+) : PagedListAdapter<ArticleBindingModel, ArticleListViewHolder>(ITEM_CALLBACK) {
 
     private val inflater = LayoutInflater.from(context)
 
@@ -26,10 +27,16 @@ class ArticleListAdapter(
     }
 
     companion object {
-        private val ITEM_CALLBACK = object : DiffUtil.ItemCallback<Article>() {
-            override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean = oldItem.id == newItem.id
+        private val ITEM_CALLBACK = object : DiffUtil.ItemCallback<ArticleBindingModel>() {
+            override fun areItemsTheSame(
+                oldItem: ArticleBindingModel,
+                newItem: ArticleBindingModel
+            ): Boolean = oldItem.articleUrl == newItem.articleUrl
 
-            override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean = oldItem == newItem
+            override fun areContentsTheSame(
+                oldItem: ArticleBindingModel,
+                newItem: ArticleBindingModel
+            ): Boolean = oldItem == newItem
         }
     }
 }
