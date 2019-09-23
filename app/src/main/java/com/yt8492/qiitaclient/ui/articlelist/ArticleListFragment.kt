@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yt8492.qiitaclient.R
 import com.yt8492.qiitaclient.databinding.FragmentArticleListBinding
-import com.yt8492.qiitaclient.domain.model.Article
 import com.yt8492.qiitaclient.ui.bindingmodel.ArticleBindingModel
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
@@ -40,18 +39,18 @@ class ArticleListFragment : Fragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_article_list, container, false)
-        binding.lifecycleOwner = this
+        setHasOptionsMenu(true)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_article_list,
+            container,
+            false
+        )
+        binding.lifecycleOwner = viewLifecycleOwner
         val articlesAdapter = ArticleListAdapter(
             requireContext(),
             onArticleClickListener
@@ -94,7 +93,7 @@ class ArticleListFragment : Fragment() {
     }
 
     private fun search(query: String?) {
-        val context = context ?: return
+        val context = requireContext()
         val intent = ArticleListActivity.createIntent(
             context,
             query

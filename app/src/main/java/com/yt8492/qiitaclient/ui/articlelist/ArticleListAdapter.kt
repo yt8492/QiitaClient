@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.yt8492.qiitaclient.domain.model.Article
 import com.yt8492.qiitaclient.ui.bindingmodel.ArticleBindingModel
 
 class ArticleListAdapter(
