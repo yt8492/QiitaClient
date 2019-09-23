@@ -3,8 +3,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="article" type="com.yt8492.qiitaclient.data.model.Article"/>
-        <variable name="clickListener" type="com.yt8492.qiitaclient.articles.OnArticleClickListener"/>
+        <variable name="article" type="com.yt8492.qiitaclient.domain.model.Article"/>
+        <variable name="clickListener" type="com.yt8492.qiitaclient.ui.articlelist.OnArticleClickListener"/>
     </data>
 
     <LinearLayout
@@ -13,17 +13,11 @@
             android:onClick="@{() -> clickListener.onClick(article)}"
             android:orientation="horizontal">
 
-        <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+        <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:orientation="vertical">
-
-            <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    app:imageUrl="@{article.user.profileImageUrl}" />
-        </LinearLayout>
+                app:imageUrl="@{article.user.profileImageUrl}" />
 
         <LinearLayout
                 android:layout_width="match_parent"
