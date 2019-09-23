@@ -8,25 +8,19 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class ArticleListViewModel(
-    private val articleRepository: ArticleRepository
+    articleRepository: ArticleRepository,
+    query: String?
 ) : ViewModel() {
 
-    private val query = MutableLiveData<String?>()
 
-    val pagedArticleList = query.switchMap { query ->
-        LivePagedListBuilder(
-            ArticleDataSourceFactory(query, articleRepository),
-            PagedList.Config.Builder()
-                .setEnablePlaceholders(false)
-                .setInitialLoadSizeHint(PER_PAGE)
-                .setPageSize(PER_PAGE)
-                .build()
-        ).build()
-    }
-
-    fun start(query: String?): Job = viewModelScope.launch {
-        this@ArticleListViewModel.query.value = query
-    }
+    val pagedArticleList = LivePagedListBuilder(
+        ArticleDataSourceFactory(query, articleRepository),
+        PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(PER_PAGE)
+            .setPageSize(PER_PAGE)
+            .build()
+    ).build()
 
     fun refresh(): Job = viewModelScope.launch {
         pagedArticleList.value?.dataSource?.invalidate()

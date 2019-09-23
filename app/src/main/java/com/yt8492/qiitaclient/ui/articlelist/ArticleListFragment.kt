@@ -7,9 +7,9 @@ import androidx.appcompat.widget.SearchView
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yt8492.qiitaclient.R
@@ -21,12 +21,9 @@ import javax.inject.Inject
 class ArticleListFragment : Fragment() {
 
     @Inject
-    internal lateinit var viewModelFactory: ArticleListViewModelFactory
+    lateinit var viewModelFactoryProvider: ArticleListViewModelFactory.Provider
 
-    private val viewModel: ArticleListViewModel by viewModels { viewModelFactory }
-
-    private val onArticleClickListener = object :
-        OnArticleClickListener {
+    private val onArticleClickListener = object : OnArticleClickListener {
         override fun onClick(article: ArticleBindingModel?) {
             if (article != null) {
                 val tabsIntent = CustomTabsIntent.Builder()
@@ -43,12 +40,16 @@ class ArticleListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
-        val binding = DataBindingUtil.inflate<FragmentArticleListBinding>(
+        val query = arguments?.getString(KEY_QUERY)
+        val binding = FragmentArticleListBinding.inflate(
             inflater,
-            R.layout.fragment_article_list,
             container,
             false
         )
+        val viewModel = ViewModelProvider(
+            this,
+            viewModelFactoryProvider.provide(query)
+        ).get<ArticleListViewModel>()
         binding.lifecycleOwner = viewLifecycleOwner
         val articlesAdapter = ArticleListAdapter(
             inflater.context,
@@ -69,8 +70,6 @@ class ArticleListFragment : Fragment() {
             articlesAdapter.submitList(it)
             binding.articlesSwipeView.isRefreshing = false
         })
-        val query = arguments?.getString(KEY_QUERY)
-        viewModel.start(query)
         // Set the adapter
         return binding.root
     }
