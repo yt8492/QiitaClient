@@ -28,6 +28,10 @@ class ArticleListViewModel(
         this@ArticleListViewModel.query.value = query
     }
 
+    fun refresh(): Job = viewModelScope.launch {
+        pagedArticleList.value?.dataSource?.invalidate()
+    }
+
     companion object {
         private const val PER_PAGE = 100
     }

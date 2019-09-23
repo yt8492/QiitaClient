@@ -62,8 +62,12 @@ class ArticleListFragment : Fragment() {
             adapter = articlesAdapter
             setLayoutManager(layoutManager)
         }
+        binding.articlesSwipeView.setOnRefreshListener {
+            viewModel.refresh()
+        }
         viewModel.pagedArticleList.observe(viewLifecycleOwner, Observer {
             articlesAdapter.submitList(it)
+            binding.articlesSwipeView.isRefreshing = false
         })
         val query = arguments?.getString(KEY_QUERY)
         viewModel.start(query)
