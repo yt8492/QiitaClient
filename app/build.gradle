@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: "de.mannodermaus.android-junit5"
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -33,6 +35,27 @@ android {
     }
     dataBinding {
         enabled = true
+    }
+    sourceSets.each {
+        it.java.srcDirs += "src/$it.name/kotlin"
+    }
+    testOptions {
+        junitPlatform {
+            filters {
+                engines {
+                    include 'spek2'
+                }
+            }
+            jacocoOptions {
+                // here goes all jacoco config, for example
+                html.enabled = true
+                xml.enabled = false
+                csv.enabled = false
+            }
+        }
+        unitTests.all {
+            testLogging.events = ["passed", "skipped", "failed"]
+        }
     }
 }
 
@@ -74,4 +97,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    testImplementation "org.spekframework.spek2:spek-dsl-jvm:$versions.spek"
+    testImplementation "org.spekframework.spek2:spek-runner-junit5:$versions.spek"
+    testImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+    testImplementation "io.mockk:mockk:$versions.mockk"
+
+    testImplementation "com.google.truth:truth:$versions.truth"
 }
