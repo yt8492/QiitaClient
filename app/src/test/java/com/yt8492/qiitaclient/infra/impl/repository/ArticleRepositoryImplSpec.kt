@@ -2,7 +2,7 @@ package com.yt8492.qiitaclient.infra.impl.repository
 
 import com.google.common.truth.Truth
 import com.yt8492.qiitaclient.domain.model.Article
-import com.yt8492.qiitaclient.infra.api.QiitaApi
+import com.yt8492.api.infra.api.QiitaApi
 import com.yt8492.qiitaclient.infra.JsonHelper
 import com.yt8492.qiitaclient.infra.impl.domain.repository.ArticleRepositoryImpl
 import io.mockk.coEvery

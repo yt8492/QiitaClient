@@ -1,4 +1,4 @@
-package com.yt8492.qiitaclient.infra.api.json
+package com.yt8492.api.infra.api.json
 
 import com.squareup.moshi.JsonClass
 

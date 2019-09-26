@@ -1,29 +1,30 @@
 package com.yt8492.qiitaclient.infra
 
 import com.yt8492.qiitaclient.RandomHelper
-import com.yt8492.qiitaclient.infra.api.json.ArticleJson
-import com.yt8492.qiitaclient.infra.api.json.UserJson
+import com.yt8492.api.infra.api.json.ArticleJson
+import com.yt8492.api.infra.api.json.UserJson
 
 object JsonHelper {
 
-    fun articleJson(): ArticleJson = ArticleJson(
-        renderedBody = RandomHelper.randomString(),
-        body = RandomHelper.randomString(),
-        commentsCount = RandomHelper.randomInt(),
-        createdAt = RandomHelper.randomDate(),
-        likesCount = RandomHelper.randomInt(),
-        isPrivate = RandomHelper.randomBoolean(),
-        reactionsCount = RandomHelper.randomInt(),
-        tags = listOf(),
-        title = RandomHelper.randomString(),
-        updatedAt = RandomHelper.randomDate(),
-        url = RandomHelper.randomUrl(),
-        user = userJson(),
-        coediting = RandomHelper.randomBoolean(),
-        group = null,
-        id = RandomHelper.randomString(),
-        viewCount = null
-    )
+    fun articleJson(): ArticleJson =
+        ArticleJson(
+            renderedBody = RandomHelper.randomString(),
+            body = RandomHelper.randomString(),
+            commentsCount = RandomHelper.randomInt(),
+            createdAt = RandomHelper.randomDate(),
+            likesCount = RandomHelper.randomInt(),
+            isPrivate = RandomHelper.randomBoolean(),
+            reactionsCount = RandomHelper.randomInt(),
+            tags = listOf(),
+            title = RandomHelper.randomString(),
+            updatedAt = RandomHelper.randomDate(),
+            url = RandomHelper.randomUrl(),
+            user = userJson(),
+            coediting = RandomHelper.randomBoolean(),
+            group = null,
+            id = RandomHelper.randomString(),
+            viewCount = null
+        )
 
     fun userJson(): UserJson = UserJson(
         description = null,

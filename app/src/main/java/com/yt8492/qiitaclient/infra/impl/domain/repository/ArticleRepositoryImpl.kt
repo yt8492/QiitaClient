@@ -1,9 +1,9 @@
 package com.yt8492.qiitaclient.infra.impl.domain.repository
 
-import com.yt8492.qiitaclient.infra.api.QiitaApi
+import com.yt8492.api.infra.api.QiitaApi
 import com.yt8492.qiitaclient.domain.model.Article
 import com.yt8492.qiitaclient.domain.repository.ArticleRepository
-import com.yt8492.qiitaclient.infra.api.json.ArticleJson
+import com.yt8492.api.infra.api.json.ArticleJson
 import com.yt8492.qiitaclient.infra.impl.domain.converter.toModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
