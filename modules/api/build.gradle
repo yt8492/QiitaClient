@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 apply from: "${rootDir.absolutePath}/modules/android_partial.gradle"
 
@@ -6,10 +6,6 @@ apply from: "${rootDir.absolutePath}/modules/test_partial.gradle"
 
 android {
     defaultConfig {
-        applicationId "com.yt8492.qiitaclient"
+        buildConfigField("String", "QIITA_URL", "\"https://qiita.com\"")
     }
-}
-
-dependencies {
-    implementation project(":modules:api")
 }

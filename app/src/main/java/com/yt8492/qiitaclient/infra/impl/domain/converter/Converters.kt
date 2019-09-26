@@ -1,9 +1,9 @@
 package com.yt8492.qiitaclient.infra.impl.domain.converter
 
-import com.yt8492.qiitaclient.infra.api.json.ArticleJson
-import com.yt8492.qiitaclient.infra.api.json.GroupJson
-import com.yt8492.qiitaclient.infra.api.json.TagJson
-import com.yt8492.qiitaclient.infra.api.json.UserJson
+import com.yt8492.api.infra.api.json.ArticleJson
+import com.yt8492.api.infra.api.json.GroupJson
+import com.yt8492.api.infra.api.json.TagJson
+import com.yt8492.api.infra.api.json.UserJson
 
 fun UserJson.toModel(): com.yt8492.qiitaclient.domain.model.User =
     com.yt8492.qiitaclient.domain.model.User(
