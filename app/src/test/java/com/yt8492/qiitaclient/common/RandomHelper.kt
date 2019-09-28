@@ -1,4 +1,4 @@
-package com.yt8492.qiitaclient
+package com.yt8492.qiitaclient.common
 
 import java.util.*
 import kotlin.random.Random

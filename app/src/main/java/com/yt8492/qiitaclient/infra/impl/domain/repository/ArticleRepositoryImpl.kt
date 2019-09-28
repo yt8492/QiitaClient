@@ -12,7 +12,7 @@ import javax.inject.Inject
 class ArticleRepositoryImpl @Inject constructor(
     private val qiitaApi: QiitaApi
 ) : ArticleRepository {
-    override suspend fun getArticles(
+    override suspend fun findAll(
         query: String?,
         page: Int,
         perPage: Int

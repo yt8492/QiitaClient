@@ -19,7 +19,7 @@ class ArticleRepositoryImplSpec : Spek({
             ArticleRepositoryImpl(qiitaApi)
         }
 
-        Scenario("ArticleRepository#getArticlesで3つのArticleが返却される") {
+        Scenario("ArticleRepository#findAllで3つのArticleが返却される") {
             lateinit var result: List<Article>
             Given("QiitaApi#getArticlesで3つのArticleJsonが返却される") {
                 coEvery {
@@ -34,7 +34,7 @@ class ArticleRepositoryImplSpec : Spek({
             }
             When("メソッドコール") {
                 result = runBlocking {
-                    subject.getArticles(
+                    subject.findAll(
                         null,
                         0,
                         30

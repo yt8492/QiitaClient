@@ -24,7 +24,7 @@ class ArticleDataSource(
         dataSourceScope.launch {
             params.requestedLoadSize
             val initialArticles = articleRepository
-                .getArticles(
+                .findAll(
                     query,
                     1,
                     params.requestedLoadSize
@@ -39,7 +39,7 @@ class ArticleDataSource(
     ) {
         dataSourceScope.launch {
             val articles = articleRepository
-                .getArticles(
+                .findAll(
                     query,
                     params.key,
                     params.requestedLoadSize
