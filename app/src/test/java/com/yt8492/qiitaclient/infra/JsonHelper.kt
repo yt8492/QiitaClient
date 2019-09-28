@@ -1,6 +1,6 @@
 package com.yt8492.qiitaclient.infra
 
-import com.yt8492.qiitaclient.RandomHelper
+import com.yt8492.qiitaclient.common.RandomHelper
 import com.yt8492.api.infra.api.json.ArticleJson
 import com.yt8492.api.infra.api.json.UserJson
 
