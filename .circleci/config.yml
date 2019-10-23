@@ -1,5 +1,17 @@
 version: 2
 jobs:
+  danger:
+    docker:
+      - image: dantoml/danger:latest
+        environment:
+          - TZ: "/usr/share/zoneinfo/Asia/Tokyo"
+          - LANG: ja_JP.UTF-8
+          - LC_ALL: C.UTF-8
+          - LANGUAGE: ja_JP.UTF-8
+    steps:
+      - checkout
+      - run: gem install danger-todoist
+      - run: danger
   build:
     working_directory: ~/code
     docker:
@@ -22,7 +34,7 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: テストを実行
-          command: ./gradlew lint test
+          command: ./gradlew lint ktlintCheck test
       - store_artifacts: # アーティファクト (https://circleci.com/docs/ja/2.0/artifacts/) に表示するため
           path: app/build/reports
           destination: reports
