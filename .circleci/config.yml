@@ -22,7 +22,7 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: テストを実行
-          command: ./gradlew lint test
+          command: ./gradlew lint ktlintCheck test
       - store_artifacts: # アーティファクト (https://circleci.com/docs/ja/2.0/artifacts/) に表示するため
           path: app/build/reports
           destination: reports
