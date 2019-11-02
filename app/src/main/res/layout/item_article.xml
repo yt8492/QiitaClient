@@ -4,8 +4,13 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="article" type="com.yt8492.qiitaclient.ui.bindingmodel.ArticleBindingModel"/>
-        <variable name="clickListener" type="com.yt8492.qiitaclient.ui.articlelist.OnArticleClickListener"/>
+        <variable
+                name="article"
+                type="com.yt8492.qiitaclient.ui.bindingmodel.ArticleBindingModel" />
+
+        <variable
+                name="clickListener"
+                type="com.yt8492.qiitaclient.ui.articlelist.OnArticleClickListener" />
     </data>
 
     <LinearLayout

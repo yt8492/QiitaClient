@@ -12,6 +12,7 @@
                 android:id="@+id/articlesRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_article" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

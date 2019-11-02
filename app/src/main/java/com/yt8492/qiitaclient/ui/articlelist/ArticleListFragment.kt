@@ -62,7 +62,6 @@ class ArticleListFragment : Fragment() {
                 DividerItemDecoration(inflater.context, layoutManager.orientation)
             addItemDecoration(dividerItemDecoration)
             adapter = articlesAdapter
-            setLayoutManager(layoutManager)
         }
         binding.articlesSwipeView.setOnRefreshListener {
             viewModel.refresh()
