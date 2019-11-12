@@ -12,9 +12,12 @@ class ArticleListViewModel(
     query: String?
 ) : ViewModel() {
 
-
     val pagedArticleList = LivePagedListBuilder(
-        ArticleDataSourceFactory(query, articleRepository),
+        ArticleDataSourceFactory(
+            query,
+            articleRepository,
+            viewModelScope
+        ),
         PagedList.Config.Builder()
             .setEnablePlaceholders(false)
             .setInitialLoadSizeHint(PER_PAGE)
