@@ -12,16 +12,15 @@ import kotlinx.coroutines.launch
 
 class ArticleDataSource(
     private val query: String?,
-    private val articleRepository: ArticleRepository
+    private val articleRepository: ArticleRepository,
+    private val scope: CoroutineScope
 ) : PageKeyedDataSource<Int, ArticleBindingModel>() {
-
-    private val dataSourceScope = CoroutineScope(Main + Job())
 
     override fun loadInitial(
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, ArticleBindingModel>
     ) {
-        dataSourceScope.launch {
+        scope.launch {
             params.requestedLoadSize
             val initialArticles = articleRepository
                 .findAll(
@@ -37,7 +36,7 @@ class ArticleDataSource(
         params: LoadParams<Int>,
         callback: LoadCallback<Int, ArticleBindingModel>
     ) {
-        dataSourceScope.launch {
+        scope.launch {
             val articles = articleRepository
                 .findAll(
                     query,
