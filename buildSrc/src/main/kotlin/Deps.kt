@@ -49,7 +49,7 @@ object Deps {
 
         object Browser {
             const val version = "1.2.0-alpha08"
-            const val browser = "androidx.browser:browser:"
+            const val browser = "androidx.browser:browser:$version"
         }
 
         object Test {
