@@ -51,6 +51,18 @@ object Deps {
             const val version = "1.2.0-alpha08"
             const val browser = "androidx.browser:browser:"
         }
+
+        object Test {
+            object Runner {
+                const val version = "1.2.0"
+                const val runnner = "androidx.test:runner:$version"
+            }
+
+            object Espresso {
+                const val version = "3.2.0"
+                const val core = "androidx.test.espresso:espresso-core:$version"
+            }
+        }
     }
 
     object Dagger {
@@ -94,6 +106,11 @@ object Deps {
     object Truth {
         const val version = "1.0"
         const val truth = "com.google.truth:truth:$version"
+    }
+
+    object JUnit {
+        const val version = "4.12"
+        const val junit = "junit:junit:$version"
     }
 
     object AndroidJUnit5 {
