@@ -24,6 +24,17 @@ dependencies {
     implementation(Deps.Moshi.kotlinCodeGen)
     implementation(Deps.Retrofit.retrofit)
     implementation(Deps.Retrofit.converterMoshi)
+
+    testImplementation(Deps.Kotlin.refrect)
+    testImplementation(Deps.KotlinX.Coroutines.test)
+    testImplementation(Deps.JUnit.junit)
+    testImplementation(Deps.Spek.dslJvm)
+    testImplementation(Deps.Spek.runnerJUnit5)
+    testImplementation(Deps.MockK.mockk)
+    testImplementation(Deps.Truth.truth)
+
+    androidTestImplementation(Deps.AndroidX.Test.Runner.runnner)
+    androidTestImplementation(Deps.AndroidX.Test.Espresso.core)
 }
 
 ktlint {
