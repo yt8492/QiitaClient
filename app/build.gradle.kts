@@ -1,17 +1,49 @@
-apply plugin: 'com.android.application'
+plugins {
+    id("com.android.application")
+    id("kotlin-android")
+    id("kotlin-android-extensions")
+    id("kotlin-kapt")
+}
 
-apply from: "${rootDir.absolutePath}/modules/android_partial.gradle"
-
-apply from: "${rootDir.absolutePath}/modules/test_partial.gradle"
-
-apply from: "${rootDir.absolutePath}/modules/lint_partial.gradle"
-
+androidCommon()
 android {
     defaultConfig {
-        applicationId "com.yt8492.qiitaclient"
+        applicationId = "com.yt8492.qiitaclient"
     }
 }
 
 dependencies {
-    implementation project(":modules:api")
+    implementation(project(":modules:api"))
+    implementation(Deps.Kotlin.jdk8)
+    implementation(Deps.KotlinX.Coroutines.core)
+    implementation(Deps.KotlinX.Coroutines.android)
+    implementation(Deps.AndroidX.Appcompat.appcompat)
+    implementation(Deps.AndroidX.Core.ktx)
+    implementation(Deps.AndroidX.Fragment.ktx)
+    implementation(Deps.AndroidX.Paging.runtime)
+    implementation(Deps.AndroidX.Lifecycle.extensions)
+    implementation(Deps.AndroidX.Lifecycle.liveDataKtx)
+    implementation(Deps.AndroidX.Lifecycle.viewModelKtx)
+    implementation(Deps.AndroidX.Browser.browser)
+    implementation(Deps.Dagger.dagger)
+    implementation(Deps.Dagger.androidSupport)
+    kapt(Deps.Dagger.compiler)
+    kapt(Deps.Dagger.androidProcessor)
+    implementation(Deps.Moshi.moshi)
+    implementation(Deps.Moshi.adapters)
+    implementation(Deps.Moshi.kotlin)
+    implementation(Deps.Moshi.kotlinCodeGen)
+    implementation(Deps.Retrofit.retrofit)
+    implementation(Deps.Retrofit.converterMoshi)
+
+    testImplementation(Deps.Kotlin.refrect)
+    testImplementation(Deps.KotlinX.Coroutines.test)
+    testImplementation(Deps.JUnit.junit)
+    testImplementation(Deps.Spek.dslJvm)
+    testImplementation(Deps.Spek.runnerJUnit5)
+    testImplementation(Deps.MockK.mockk)
+    testImplementation(Deps.Truth.truth)
+
+    androidTestImplementation(Deps.AndroidX.Test.Runner.runnner)
+    androidTestImplementation(Deps.AndroidX.Test.Espresso.core)
 }
