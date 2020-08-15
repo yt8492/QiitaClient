@@ -3,6 +3,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 androidCommon()
@@ -46,4 +47,10 @@ dependencies {
 
     androidTestImplementation(Deps.AndroidX.Test.Runner.runnner)
     androidTestImplementation(Deps.AndroidX.Test.Espresso.core)
+}
+
+ktlint {
+    version.set("0.22.0")
+    android.set(true)
+    ignoreFailures.set(true)
 }
