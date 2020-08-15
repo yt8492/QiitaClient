@@ -2,6 +2,7 @@ import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 private fun Project.androidExt(configure: BaseAppModuleExtension.() -> Unit) {
     (this as ExtensionAware).extensions.configure("android", configure)
@@ -29,12 +30,17 @@ fun Project.androidCommon() {
                 )
             }
         }
-        dataBinding {
-            isEnabled = true
+        buildFeatures {
+            dataBinding = true
         }
         compileOptions {
             sourceCompatibility = JavaVersion.VERSION_1_8
             targetCompatibility = JavaVersion.VERSION_1_8
+        }
+        tasks.withType(KotlinCompile::class.java).configureEach {
+            kotlinOptions {
+                jvmTarget = "1.8"
+            }
         }
     }
 }
