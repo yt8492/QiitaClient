@@ -21,7 +21,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle.kts" }}-{{ checksum  "modules/api/build.gradle.kts" }}
+          key: jars-{{ checksum "build.gradle.kts" }}-{{ checksum  "app/build.gradle.kts" }}-{{ checksum  "modules/api/build.gradle.kts" }}
       #      - run:
       #         name: Chmod パーミッション # Gradlew Dependencies のパーミッションが失敗する場合は、これを使用します
       #         command: sudo chmod +x ./gradlew
@@ -31,7 +31,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle.kts" }}-{{ checksum  "modules/api/build.gradle.kts" }}
+          key: jars-{{ checksum "build.gradle.kts" }}-{{ checksum  "app/build.gradle.kts" }}-{{ checksum  "modules/api/build.gradle.kts" }}
       - run:
           name: テストを実行
           command: ./gradlew lint ktlintCheck test
