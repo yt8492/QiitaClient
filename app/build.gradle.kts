@@ -36,6 +36,7 @@ dependencies {
     implementation(Deps.Moshi.kotlinCodeGen)
     implementation(Deps.Retrofit.retrofit)
     implementation(Deps.Retrofit.converterMoshi)
+    implementation(Deps.Picasso.picasso)
 
     testImplementation(Deps.Kotlin.refrect)
     testImplementation(Deps.KotlinX.Coroutines.test)
