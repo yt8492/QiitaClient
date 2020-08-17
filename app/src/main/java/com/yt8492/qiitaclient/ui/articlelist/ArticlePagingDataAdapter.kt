@@ -3,26 +3,29 @@ package com.yt8492.qiitaclient.ui.articlelist
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.yt8492.qiitaclient.ui.bindingmodel.ArticleBindingModel
 
-class ArticleListAdapter(
+class ArticlePagingDataAdapter(
     context: Context,
     private val listener: OnArticleClickListener
-) : PagedListAdapter<ArticleBindingModel, ArticleListViewHolder>(ITEM_CALLBACK) {
+) : PagingDataAdapter<ArticleBindingModel, ArticleListViewHolder>(
+    ITEM_CALLBACK
+) {
 
     private val inflater = LayoutInflater.from(context)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleListViewHolder =
-        ArticleListViewHolder.create(
+    override fun onBindViewHolder(holder: ArticleListViewHolder, position: Int) {
+        holder.bind(getItem(position), listener)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleListViewHolder {
+        return ArticleListViewHolder.create(
             inflater,
             parent,
             false
         )
-
-    override fun onBindViewHolder(holder: ArticleListViewHolder, position: Int) {
-        holder.bind(getItem(position), listener)
     }
 
     companion object {
