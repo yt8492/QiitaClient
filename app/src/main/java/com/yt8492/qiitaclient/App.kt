@@ -1,22 +1,19 @@
 package com.yt8492.qiitaclient
 
 import android.app.Application
-import androidx.fragment.app.Fragment
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
+import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-class App : Application(), HasSupportFragmentInjector {
+class App : Application(), HasAndroidInjector {
 
     @Inject
-    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+    lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
-    override fun onCreate() {
-        super.onCreate()
+    override fun androidInjector(): AndroidInjector<Any> {
         DaggerAppComponent.create()
             .inject(this)
+        return androidInjector
     }
-
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> = fragmentInjector
 }

@@ -21,6 +21,7 @@ dependencies {
     implementation(Deps.AndroidX.Appcompat.appcompat)
     implementation(Deps.AndroidX.Core.ktx)
     implementation(Deps.AndroidX.Fragment.ktx)
+    implementation(Deps.AndroidX.SwipeRefreshLayout.swipeRefreshLayout)
     implementation(Deps.AndroidX.Paging.runtime)
     implementation(Deps.AndroidX.Lifecycle.extensions)
     implementation(Deps.AndroidX.Lifecycle.liveDataKtx)
