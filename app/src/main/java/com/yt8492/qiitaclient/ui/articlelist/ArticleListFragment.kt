@@ -78,10 +78,13 @@ class ArticleListFragment : Fragment() {
         }
         lifecycleScope.launchWhenStarted {
             articlesAdapter.loadStateFlow.collect {
-                it.source.forEach { _, loadState ->
-                    if (loadState is LoadState.Error) {
-                        toast(loadState.error.message ?: "error")
-                    }
+                val refresh = it.refresh
+                if (refresh is LoadState.Error) {
+                    toast(refresh.error.message ?: "error")
+                }
+                val append = it.append
+                if (append is LoadState.Error) {
+                    toast(append.error.message ?: "error")
                 }
             }
         }
