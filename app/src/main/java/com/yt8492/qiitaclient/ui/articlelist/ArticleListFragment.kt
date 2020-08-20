@@ -11,14 +11,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yt8492.qiitaclient.R
 import com.yt8492.qiitaclient.databinding.FragmentArticleListBinding
 import com.yt8492.qiitaclient.ui.bindingmodel.ArticleBindingModel
+import com.yt8492.qiitaclient.util.extention.toast
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ArticleListFragment : Fragment() {
@@ -70,12 +71,23 @@ class ArticleListFragment : Fragment() {
         binding.articlesSwipeView.setOnRefreshListener {
             articlesAdapter.refresh()
         }
-        lifecycleScope.launch {
-            viewModel.pagedArticleFlow.collect {
-                articlesAdapter.submitData(it)
-            }
+        lifecycleScope.launchWhenStarted {
             articlesAdapter.dataRefreshFlow.collect {
                 binding.articlesSwipeView.isRefreshing = it
+            }
+        }
+        lifecycleScope.launchWhenStarted {
+            articlesAdapter.loadStateFlow.collect {
+                it.source.forEach { _, loadState ->
+                    if (loadState is LoadState.Error) {
+                        toast(loadState.error.message ?: "error")
+                    }
+                }
+            }
+        }
+        lifecycleScope.launchWhenStarted {
+            viewModel.pagedArticleFlow.collect {
+                articlesAdapter.submitData(it)
             }
         }
         return binding.root

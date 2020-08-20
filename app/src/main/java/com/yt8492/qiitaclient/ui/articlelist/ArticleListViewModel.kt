@@ -14,7 +14,7 @@ class ArticleListViewModel(
     query: String?
 ) : ViewModel() {
 
-    val pagedArticleFlow = Pager(PagingConfig(PER_PAGE, PER_PAGE)) {
+    val pagedArticleFlow = Pager(PagingConfig(pageSize = PER_PAGE, initialLoadSize = PER_PAGE)) {
         ArticlePagingSource(query, articleRepository)
     }.flow
 
