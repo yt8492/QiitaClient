@@ -7,15 +7,19 @@ import androidx.appcompat.widget.SearchView
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yt8492.qiitaclient.R
 import com.yt8492.qiitaclient.databinding.FragmentArticleListBinding
 import com.yt8492.qiitaclient.ui.bindingmodel.ArticleBindingModel
+import com.yt8492.qiitaclient.util.extention.toast
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 class ArticleListFragment : Fragment() {
@@ -35,6 +39,7 @@ class ArticleListFragment : Fragment() {
         }
     }
 
+    @ExperimentalPagingApi
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,7 +57,7 @@ class ArticleListFragment : Fragment() {
             viewModelFactoryProvider.provide(query)
         ).get<ArticleListViewModel>()
         binding.lifecycleOwner = viewLifecycleOwner
-        val articlesAdapter = ArticleListAdapter(
+        val articlesAdapter = ArticlePagingDataAdapter(
             inflater.context,
             onArticleClickListener
         )
@@ -64,13 +69,30 @@ class ArticleListFragment : Fragment() {
             adapter = articlesAdapter
         }
         binding.articlesSwipeView.setOnRefreshListener {
-            viewModel.refresh()
+            articlesAdapter.refresh()
         }
-        viewModel.pagedArticleList.observe(viewLifecycleOwner, Observer {
-            articlesAdapter.submitList(it)
-            binding.articlesSwipeView.isRefreshing = false
-        })
-        // Set the adapter
+        lifecycleScope.launchWhenStarted {
+            articlesAdapter.dataRefreshFlow.collect {
+                binding.articlesSwipeView.isRefreshing = it
+            }
+        }
+        lifecycleScope.launchWhenStarted {
+            articlesAdapter.loadStateFlow.collect {
+                val refresh = it.refresh
+                if (refresh is LoadState.Error) {
+                    toast(refresh.error.message ?: "error")
+                }
+                val append = it.append
+                if (append is LoadState.Error) {
+                    toast(append.error.message ?: "error")
+                }
+            }
+        }
+        lifecycleScope.launchWhenStarted {
+            viewModel.pagedArticleFlow.collect {
+                articlesAdapter.submitData(it)
+            }
+        }
         return binding.root
     }
 

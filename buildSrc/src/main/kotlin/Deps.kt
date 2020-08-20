@@ -26,29 +26,34 @@ object Deps {
         }
 
         object Core {
-            const val version = "1.2.0-alpha04"
+            const val version = "1.3.1"
             const val ktx = "androidx.core:core-ktx:$version"
         }
 
         object Fragment {
-            const val version = "1.2.0-alpha04"
+            const val version = "1.2.5"
             const val ktx = "androidx.fragment:fragment-ktx:$version"
         }
 
+        object SwipeRefreshLayout {
+            const val version = "1.1.0"
+            const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:$version"
+        }
+
         object Paging {
-            const val version = "2.1.0"
+            const val version = "3.0.0-alpha03"
             const val runtime = "androidx.paging:paging-runtime:$version"
         }
 
         object Lifecycle {
-            const val version = "2.2.0-alpha05"
+            const val version = "2.2.0"
             const val extensions = "androidx.lifecycle:lifecycle-extensions:$version"
             const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
             const val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
         }
 
         object Browser {
-            const val version = "1.2.0-alpha08"
+            const val version = "1.2.0"
             const val browser = "androidx.browser:browser:$version"
         }
 
@@ -66,7 +71,7 @@ object Deps {
     }
 
     object Dagger {
-        const val versioin = "2.23.2"
+        const val versioin = "2.28.3"
         const val dagger = "com.google.dagger:dagger:$versioin"
         const val androidSupport = "com.google.dagger:dagger-android-support:$versioin"
         const val compiler = "com.google.dagger:dagger-compiler:$versioin"
@@ -74,7 +79,7 @@ object Deps {
     }
 
     object Moshi {
-        const val version = "1.8.0"
+        const val version = "1.9.3"
         const val moshi = "com.squareup.moshi:moshi:$version"
         const val adapters = "com.squareup.moshi:moshi-adapters:$version"
         const val kotlin = "com.squareup.moshi:moshi-kotlin:$version"
@@ -82,7 +87,7 @@ object Deps {
     }
 
     object Retrofit {
-        const val version = "2.6.0"
+        const val version = "2.9.0"
         const val retrofit = "com.squareup.retrofit2:retrofit:$version"
         const val converterMoshi = "com.squareup.retrofit2:converter-moshi:$version"
     }

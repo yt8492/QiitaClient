@@ -50,5 +50,12 @@ fun Project.androidCommon() {
                 jvmTarget = "1.8"
             }
         }
+        packagingOptions {
+            exclude("META-INF/LICENSE.md")
+            exclude("META-INF/main.kotlin_module")
+            exclude("META-INF/metadata.kotlin_module")
+            exclude("META-INF/metadata.jvm.kotlin_module")
+            exclude("META-INF/LICENSE-notice.md")
+        }
     }
 }
