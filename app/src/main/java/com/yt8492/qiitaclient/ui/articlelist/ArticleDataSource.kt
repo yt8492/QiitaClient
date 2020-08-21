@@ -6,8 +6,6 @@ import com.yt8492.qiitaclient.domain.repository.ArticleRepository
 import com.yt8492.qiitaclient.ui.bindingmodel.ArticleBindingModel
 import com.yt8492.qiitaclient.ui.converter.toBindingModel
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class ArticleDataSource(
@@ -21,7 +19,6 @@ class ArticleDataSource(
         callback: LoadInitialCallback<Int, ArticleBindingModel>
     ) {
         scope.launch {
-            params.requestedLoadSize
             val initialArticles = articleRepository
                 .findAll(
                     query,
@@ -52,5 +49,4 @@ class ArticleDataSource(
         callback: LoadCallback<Int, ArticleBindingModel>
     ) {
     }
-
 }
