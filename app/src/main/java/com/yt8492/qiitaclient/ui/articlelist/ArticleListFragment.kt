@@ -19,7 +19,6 @@ import com.yt8492.qiitaclient.databinding.FragmentArticleListBinding
 import com.yt8492.qiitaclient.ui.bindingmodel.ArticleBindingModel
 import com.yt8492.qiitaclient.util.extention.toast
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
