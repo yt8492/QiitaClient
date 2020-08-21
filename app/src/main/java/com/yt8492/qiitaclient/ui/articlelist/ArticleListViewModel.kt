@@ -3,6 +3,7 @@ package com.yt8492.qiitaclient.ui.articlelist
 import androidx.lifecycle.*
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import androidx.paging.liveData
 import com.yt8492.qiitaclient.domain.repository.ArticleRepository
 import kotlinx.coroutines.Job
@@ -16,7 +17,7 @@ class ArticleListViewModel(
 
     val pagedArticleFlow = Pager(PagingConfig(pageSize = PER_PAGE, initialLoadSize = PER_PAGE)) {
         ArticlePagingSource(query, articleRepository)
-    }.flow
+    }.flow.cachedIn(viewModelScope)
 
     companion object {
         private const val PER_PAGE = 100
