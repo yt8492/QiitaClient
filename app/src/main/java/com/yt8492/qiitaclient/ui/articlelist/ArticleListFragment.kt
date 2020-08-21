@@ -20,6 +20,7 @@ import com.yt8492.qiitaclient.ui.bindingmodel.ArticleBindingModel
 import com.yt8492.qiitaclient.util.extention.toast
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 class ArticleListFragment : Fragment() {
@@ -72,12 +73,12 @@ class ArticleListFragment : Fragment() {
             articlesAdapter.refresh()
         }
         lifecycleScope.launchWhenStarted {
-            articlesAdapter.dataRefreshFlow.collect {
+            articlesAdapter.dataRefreshFlow.collectLatest {
                 binding.articlesSwipeView.isRefreshing = it
             }
         }
         lifecycleScope.launchWhenStarted {
-            articlesAdapter.loadStateFlow.collect {
+            articlesAdapter.loadStateFlow.collectLatest {
                 val refresh = it.refresh
                 if (refresh is LoadState.Error) {
                     toast(refresh.error.message ?: "error")
@@ -89,7 +90,7 @@ class ArticleListFragment : Fragment() {
             }
         }
         lifecycleScope.launchWhenStarted {
-            viewModel.pagedArticleFlow.collect {
+            viewModel.pagedArticleFlow.collectLatest {
                 articlesAdapter.submitData(it)
             }
         }
