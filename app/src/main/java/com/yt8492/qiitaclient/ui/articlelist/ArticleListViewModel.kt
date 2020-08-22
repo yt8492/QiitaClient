@@ -4,11 +4,7 @@ import androidx.lifecycle.*
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
-import androidx.paging.liveData
 import com.yt8492.qiitaclient.domain.repository.ArticleRepository
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 class ArticleListViewModel(
     articleRepository: ArticleRepository,
